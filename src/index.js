@@ -56,8 +56,8 @@ function calculateYearsDifferenceToTwiceOlder(fatherAge, sonAge) {
  * @param {number} fatherAge - Age of the father.
  * @param {number} sonAge - Age of the son.
  * @returns {number} Returns:
- *  0 - if data is invalid,
- *  -1 - if father is twice as old now,
+ *  -1 - if data is invalid,
+ *  0 - if father is twice as old now,
  *  any number - years before/after will be/was twice as old as his son
  */
 function getYearsUntilOrSinceTwiceOlder(fatherAge, sonAge) {
@@ -96,7 +96,7 @@ function printResult(fatherAge, sonAge) {
                 console.log(
                     `✅ The father will be twice as old as his son in ${result} years, when the father will be ${
                         fatherAge + result
-                    } years old and the son will be: ${
+                    } years old and the son will be ${
                         sonAge + result
                     } years old`
                 );
@@ -110,7 +110,7 @@ function printResult(fatherAge, sonAge) {
     }
 }
 
-printResult(50, 30);
+printResult(45, 30);
 printResult(80, 35);
 printResult(20, 50);
 printResult(60, 30);
