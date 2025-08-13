@@ -90,11 +90,9 @@ function printResult(fatherAge, sonAge) {
             );
             break;
         default:
-            const isFatherX2OlderThenSon = isFatherMoreThanTwiceOlder(
-                fatherAge,
-                sonAge
-            );
-            if (isFatherX2OlderThenSon) {
+            const isFatherMoreThanTwiceOlderThenSon =
+                isFatherMoreThanTwiceOlder(fatherAge, sonAge);
+            if (isFatherMoreThanTwiceOlderThenSon) {
                 console.log(
                     `✅ Father will be twofold older than Son in ${result} years, when Father's age will be: ${
                         fatherAge + result
