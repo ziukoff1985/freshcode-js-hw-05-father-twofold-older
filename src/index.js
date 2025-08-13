@@ -1,85 +1,80 @@
 'use strict';
 
-// TODO First version with for loop
+const INVALID_DATA = 0;
+const TWOFOLD_OLDER_NOW = -1;
 
-const fatherX2OlderThenSon = (fatherAge, sonAge) => fatherAge / sonAge > 2;
+const fatherMoreThenX2OlderThenSon = (fatherAge, sonAge) =>
+    fatherAge / sonAge > 2;
 
 function validateAge(fatherAge, sonAge) {
     if (
-        fatherAge < 0 ||
-        sonAge < 0 ||
-        fatherAge - sonAge < 15 ||
-        typeof fatherAge !== 'number' ||
-        typeof sonAge !== 'number'
+        typeof fatherAge === 'number' &&
+        typeof sonAge === 'number' &&
+        fatherAge > 0 &&
+        sonAge > 0 &&
+        fatherAge - sonAge >= 15
     ) {
-        return false;
+        return true;
     }
-    return true;
+    return false;
 }
 
 function calcResultByX(fatherAge, sonAge) {
-    const isFatherX2OlderThenSon = fatherX2OlderThenSon(fatherAge, sonAge);
+    const isFatherMoreThenX2OlderThenSon = fatherMoreThenX2OlderThenSon(
+        fatherAge,
+        sonAge
+    );
 
-    for (let i = 0; i <= fatherAge; i++) {
-        if (isFatherX2OlderThenSon) {
-            const result = (fatherAge + i) / (sonAge + i);
-            if (result === 2) return i;
-        }
-        if (!isFatherX2OlderThenSon) {
-            const result = (fatherAge - i) / (sonAge - i);
-            if (result === 2) return i;
-        }
+    if (isFatherMoreThenX2OlderThenSon) {
+        return fatherAge - 2 * sonAge;
     }
+
+    return 2 * sonAge - fatherAge;
 }
 
 function calculateAgeDiff(fatherAge, sonAge) {
     const isDataValid = validateAge(fatherAge, sonAge);
 
-    if (!isDataValid) {
-        return 1;
-    }
+    if (!isDataValid) return INVALID_DATA;
 
-    if (fatherAge / sonAge === 2) {
-        return 2;
-    }
+    if (fatherAge / sonAge === 2) return TWOFOLD_OLDER_NOW;
 
-    const result = calcResultByX(fatherAge, sonAge);
-    return result;
+    return calcResultByX(fatherAge, sonAge);
 }
 
 function printResult(fatherAge, sonAge) {
     const result = calculateAgeDiff(fatherAge, sonAge);
 
-    const isFatherX2OlderThenSon = fatherX2OlderThenSon(fatherAge, sonAge);
-
-    if (result === 1) {
-        console.log(
-            `❌ Invalid data: (${fatherAge}, ${sonAge}), age should be a number, age difference should be more than 15, ages should be more than 0, try again`
-        );
-        return;
-    }
-    if (result === 2) {
-        console.log(
-            `❗ Father is twofold older now, Father age: ${fatherAge}, Son age: ${sonAge}`
-        );
-        return;
-    }
-    if (isFatherX2OlderThenSon) {
-        console.log(
-            `❗ Father will be twofold older in ${result} years, when Father's age will be: ${
-                fatherAge + result
-            }, Son's age will be: ${sonAge + result}`
-        );
-        return;
-    }
-    if (!isFatherX2OlderThenSon) {
-        console.log(
-            `❗ Father was twofold older ${result} years ago, when Father's age was: ${
-                fatherAge - result
-            }, Son's age was: ${sonAge - result}`
-        );
-        return;
+    switch (result) {
+        case INVALID_DATA:
+            console.log(
+                `❌ Invalid data: (${fatherAge}, ${sonAge}), age should be a number, age difference should be more than 15, ages should be more than 0, try again`
+            );
+            break;
+        case TWOFOLD_OLDER_NOW:
+            console.log(
+                `🆗 Father is twofold older now, Father age: ${fatherAge}, Son age: ${sonAge}`
+            );
+            break;
+        default:
+            const isFatherX2OlderThenSon = fatherMoreThenX2OlderThenSon(
+                fatherAge,
+                sonAge
+            );
+            if (isFatherX2OlderThenSon) {
+                console.log(
+                    `✅ Father will be twofold older than Son in ${result} years, when Father's age will be: ${
+                        fatherAge + result
+                    } and Son's age will be: ${sonAge + result}`
+                );
+            } else {
+                console.log(
+                    `✅ Father was twofold older than Son ${result} years ago, when Father's age was: ${
+                        fatherAge - result
+                    } and Son's age was: ${sonAge - result}`
+                );
+            }
     }
 }
 
-printResult(80, 10);
+printResult(80, 35);
