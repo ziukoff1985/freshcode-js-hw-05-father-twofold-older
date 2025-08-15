@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Calculate number of years when father will be or was twice older than son
+ * Calculates number of years when father will be or was twice older than son
  * @param {number} fatherAge
  * @param {number} sonAge
  * @returns {void}
