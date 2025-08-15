@@ -1,15 +1,21 @@
 'use strict';
 
+/**
+ * Calculate number of years when father will be or was twice older than son
+ * @param {number} fatherAge
+ * @param {number} sonAge
+ * @returns {void}
+ */
 function twiceOlder(fatherAge, sonAge) {
     if (
         typeof fatherAge !== 'number' ||
         typeof sonAge !== 'number' ||
-        fatherAge <= 0 ||
-        sonAge <= 0 ||
+        fatherAge < 0 ||
+        sonAge < 0 ||
         fatherAge - sonAge < 15
     )
         return console.log(
-            `❌ Invalid data - age must be a number, age diff ≥ 15, ages must be > 0, try again: (${fatherAge}, ${sonAge})`
+            `❌ Invalid data - age must be a number, age diff ≥ 15, ages must be ≥ 0, try again: (${fatherAge}, ${sonAge})`
         );
 
     if (fatherAge / sonAge === 2)
@@ -39,3 +45,4 @@ twiceOlder(70, 30);
 twiceOlder(0, 30);
 twiceOlder(60, 30);
 twiceOlder(60, 10.5);
+twiceOlder(60, 0.1);
