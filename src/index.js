@@ -2,8 +2,8 @@
 
 /**
  * Calculates number of years when father will be or was twice older than son
- * @param {number} fatherAge
- * @param {number} sonAge
+ * @param {number} fatherAge - age of father
+ * @param {number} sonAge - age of son
  * @returns {void}
  */
 function twiceOlder(fatherAge, sonAge) {
